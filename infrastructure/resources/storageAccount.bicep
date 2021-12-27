@@ -5,7 +5,7 @@
 param environment string
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2021-06-01' = {
-  name: 'sabadadvisor${environment}-Oleg'
+  name: 'sabadadvisor${environment}-oleg'
   location: 'eastus'
   sku: {
     name: 'Standard_LRS'
