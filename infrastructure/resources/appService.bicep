@@ -5,6 +5,7 @@
 param environment string
 
 var planName = 'plan-badadvisor-${environment}'
+var webSiteName = toLower('wapp-badadviser-${environment}')
 
 resource plan 'Microsoft.Web/serverfarms@2021-02-01' = {
   name: planName
