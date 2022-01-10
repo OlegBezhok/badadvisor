@@ -3,6 +3,8 @@
   'prod'
 ])
 param environment string
+param vnetName string
+param subnetId string
 
 var planName = 'plan-badadvisor-${environment}'
 var webSiteName = toLower('wapp-badadviser-ob-${environment}')
@@ -11,8 +13,8 @@ resource plan 'Microsoft.Web/serverfarms@2021-02-01' = {
   name: planName
   location: resourceGroup().location
   sku: {
-    tier: 'Free'
-    name: 'F1'
+    tier: 'Standart'
+    name: 'S1'
   }
   kind: 'linux'
   properties: {
@@ -29,7 +31,10 @@ resource appservice 'Microsoft.Web/sites@2021-02-01'= {
     enabled: true
     siteConfig: {
         netFrameworkVersion: 'v5.0'
+        vnetName: vnetName
+        vnetRouteAllEnabled: true
     }
+    virtualNetworkSubnetId: subnetId
   }
   identity:{
     type: 'SystemAssigned'

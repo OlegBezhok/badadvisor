@@ -12,7 +12,9 @@ module storageAccount 'resources/storageAccount.bicep' = {
 module appService 'resources/appService.bicep' = {
   name: 'appService-deployment'
   params: {
-    environment: environment
+    environment: environment,
+    subnetId:vNet.outputs.subnetId
+    vnetName:vNet.name
   }
 }
 
