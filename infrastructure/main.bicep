@@ -25,3 +25,10 @@ module vNet 'resources/vnet.bicep' = {
     resourcePostfix: resourcePostfix
   }
 }
+
+module sqlDatabase 'resources/sqlDatabase.bicep' = {
+  name: 'sqlDatabase-deployment'
+  params: {
+    environment: environment
+  }
+}
