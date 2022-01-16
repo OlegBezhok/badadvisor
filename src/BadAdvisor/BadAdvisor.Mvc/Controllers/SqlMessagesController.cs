@@ -25,7 +25,8 @@ namespace BadAdvisor.Mvc.Controllers
             var messages = await _dbContext.Messages.ToListAsync();
             var maxNumber = messages.Count;
 
-            var message = messages.FirstOrDefault(x => x.MessageId == _rand.Next(1, maxNumber));
+            var randomNumber = _rand.Next(1, maxNumber);
+            var message = messages.First(x => x.MessageId == randomNumber);
 
             return new JsonResult(new MessageModel()
             {
