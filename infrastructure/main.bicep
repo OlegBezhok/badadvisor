@@ -30,5 +30,6 @@ module sqlDatabase 'resources/sqlDatabase.bicep' = {
   name: 'sqlDatabase-deployment'
   params: {
     environment: environment
+    subnetId: vNet.outputs.subnetId
   }
 }
