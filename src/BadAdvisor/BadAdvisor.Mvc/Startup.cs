@@ -2,6 +2,7 @@ using BadAdvisor.Mvc.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Azure.Cosmos.Table;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,6 +29,9 @@ namespace BadAdvisor.Mvc
                 var storageAccount = s.GetRequiredService<CloudStorageAccount>();
                 return storageAccount.CreateCloudTableClient(new TableClientConfiguration());
             });
+
+            services.AddDbContext<BadAdVisorContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddControllersWithViews();
         }

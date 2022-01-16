@@ -3,7 +3,7 @@
 });
 
 const getRandom = () => {
-    apiGet('/messages/random', (message) => {
+    apiGet('/sqlMessages/random', (message) => {
         $('#message_text').text(message.text);
     });
 }

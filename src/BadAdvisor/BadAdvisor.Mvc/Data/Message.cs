@@ -9,5 +9,7 @@ namespace BadAdvisor.Mvc.Data
         public int Likes { get; set; }
 
         public int TimesCopied { get; set; }
+
+        public int MessageId { get; set; }
     }
 }

@@ -1,0 +1,38 @@
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using BadAdvisor.Mvc.Data;
+using BadAdvisor.Mvc.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
+namespace BadAdvisor.Mvc.Controllers
+{
+    [Route("sqlMessages")]
+    public class SqlMessagesController : Controller
+    {
+        private static Random _rand = new(DateTime.UtcNow.Millisecond);
+        private readonly BadAdVisorContext _dbContext;
+
+        public SqlMessagesController(BadAdVisorContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
+        [HttpGet("random")]
+        public async Task<IActionResult> GetRandom()
+        {
+            var messages = await _dbContext.Messages.ToListAsync();
+            var maxNumber = messages.Count;
+
+            var message = messages.FirstOrDefault(x => x.MessageId == _rand.Next(maxNumber) + 1);
+
+            return new JsonResult(new MessageModel()
+            {
+                Likes = message.Likes,
+                Text = message.Text,
+                TimesCopied = message.TimesCopied,
+            });
+        }
+    }
+}
