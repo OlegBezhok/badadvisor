@@ -10,4 +10,8 @@ resource sqlDatabase 'Microsoft.Sql/servers@2021-05-01-preview' = {
   identity:{
     type: 'SystemAssigned'
   }
+  properties: {
+    administratorLogin:'TestLoginAdmin'
+    administratorLoginPassword:'TestPassword!1'
+  }
 }
