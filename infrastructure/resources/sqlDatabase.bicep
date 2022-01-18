@@ -15,13 +15,11 @@ resource sqlDatabase 'Microsoft.Sql/servers@2021-05-01-preview' = {
     administratorLogin:'TestLoginAdmin'
     administratorLoginPassword:'TestPassword!1'
   }
-}
-
-resource sqlDatabaseVNet 'Microsoft.Sql/servers/virtualNetworkRules@2021-05-01-preview' = {
-  name: 'sqlDatabaseVNet'
-  parent: sqlDatabase
-  properties: {
-    ignoreMissingVnetServiceEndpoint: true
-    virtualNetworkSubnetId: subnetId
+  resource sqlDatabaseVNetRules 'virtualNetworkRules@2021-05-01-preview' = {
+    name: 'sqlDatabaseVNetRules${environment}'
+    properties: {
+      ignoreMissingVnetServiceEndpoint: true
+      virtualNetworkSubnetId: subnetId
+    }
   }
 }
